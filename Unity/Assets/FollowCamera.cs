@@ -22,7 +22,7 @@ public class FollowCamera : MonoBehaviour
         if (followingTarget)
         {
             transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
-            //transform.LookAt(target.parent);
+            transform.LookAt(target.parent);
         }
 
         if (Input.GetKey(KeyCode.Z))

@@ -840,6 +840,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 90
+--- !u!64 &929766192
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929766187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2194042186925421486, guid: 2a0463eb1e66e684eb12c5f2891afddf, type: 3}
 --- !u!1 &1039729033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1288,7 @@ GameObject:
   - component: {fileID: 1382551198}
   - component: {fileID: 1382551201}
   - component: {fileID: 1382551202}
+  - component: {fileID: 1382551203}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1359,6 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb3da58f7ae8904d808d20bd59dda5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followCamera: {fileID: 1382551202}
   mainCamera: {fileID: 0}
   speed: 50
   lookSpeed: 150
@@ -1437,12 +1453,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382551197}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6d5385dd24c154408bdee466d3ece9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 929766188}
+  followingTarget: 0
+--- !u!135 &1382551203
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382551197}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1678432556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1583,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2a0463eb1e66e684eb12c5f2891afddf,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2a0463eb1e66e684eb12c5f2891afddf,
         type: 3}

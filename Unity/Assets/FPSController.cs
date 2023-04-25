@@ -5,11 +5,15 @@ using System.Text;
 
 public class FPSController : MonoBehaviour
 {
+    public FollowCamera followCamera;
+
     public GameObject mainCamera;
     public float speed = 50.0f;
     public float lookSpeed = 150.0f;
 
     public bool allowPitch = true;
+
+    public bool canMove = true;
 
     public GUIStyle style;
     // Use this for initialization
@@ -19,6 +23,11 @@ public class FPSController : MonoBehaviour
         if (mainCamera == null)
         {
             mainCamera = Camera.main.gameObject;
+        }
+
+        if (followCamera == null)
+        {
+            followCamera = Camera.main.gameObject.GetComponent<FollowCamera>();
         }
     }
 
@@ -51,10 +60,13 @@ public class FPSController : MonoBehaviour
 
     void Walk(float units)
     {
-        Vector3 forward = mainCamera.transform.forward;
-        //forward.y = 0;
-        forward.Normalize();
-        transform.position += forward * units;
+        if (canMove)
+        {
+            Vector3 forward = mainCamera.transform.forward;
+            //forward.y = 0;
+            forward.Normalize();
+            transform.position += forward * units;
+        }
     }
 
     void Fly(float units)
@@ -66,6 +78,17 @@ public class FPSController : MonoBehaviour
     {
         transform.position += mainCamera.transform.right * units;
             
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Pod")
+        {
+            if (Input.GetKey(KeyCode.R))
+            {
+                followCamera.followingTarget = true;
+            }
+        }
     }
 
     // Update is called once per frame

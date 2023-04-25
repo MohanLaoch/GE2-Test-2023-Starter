@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class ColourChange : MonoBehaviour
 {
-    private MeshRenderer meshRenderer;
+    private MeshRenderer renderer;
 
-    private int colorIndex = 0;
-
-    [SerializeField] [Range(0f, 1f)] private float lerpTime;
-
-    private float t = 0f;
+    float timeLeft;
+    Color targetColor;
 
     private void Start()
     {
-        meshRenderer = this.gameObject.GetComponent<MeshRenderer>();
+        renderer = this.gameObject.GetComponent<MeshRenderer>();
     }
 
-    private void Update()
-    {
-        
 
-        t = Mathf.Lerp(t, 1f, lerpTime * Time.deltaTime);
-        if (t > .9f)
+    void Update()
+    {
+        if (timeLeft <= Time.deltaTime)
         {
-            t = 0f;
-            colorIndex++;
-            meshRenderer.material.color = new Color(colorIndex, colorIndex, colorIndex);
+            // transition complete
+            // assign the target color
+            renderer.material.color = targetColor;
+
+            // start a new transition
+            targetColor = new Color(Random.value, Random.value, Random.value);
+            timeLeft = 1.0f;
+        }
+        else
+        {
+            // transition in progress
+            // calculate interpolated color
+            renderer.material.color = Color.Lerp(renderer.material.color, targetColor, Time.deltaTime / timeLeft);
+
+            // update the timer
+            timeLeft -= Time.deltaTime;
         }
     }
 

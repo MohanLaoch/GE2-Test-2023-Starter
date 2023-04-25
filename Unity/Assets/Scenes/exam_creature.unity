@@ -1289,6 +1289,7 @@ GameObject:
   - component: {fileID: 1382551201}
   - component: {fileID: 1382551202}
   - component: {fileID: 1382551203}
+  - component: {fileID: 1382551204}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1379,6 +1380,7 @@ MonoBehaviour:
   speed: 50
   lookSpeed: 150
   allowPitch: 1
+  canMove: 1
   style:
     m_Name: 
     m_Normal:
@@ -1458,6 +1460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d5385dd24c154408bdee466d3ece9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fPSController: {fileID: 0}
   target: {fileID: 929766188}
   followingTarget: 0
 --- !u!135 &1382551203
@@ -1471,8 +1474,24 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1382551204
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382551197}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1678432556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,6 +1662,11 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2a0463eb1e66e684eb12c5f2891afddf,
         type: 3}
       propertyPath: m_Name
+      value: Pod
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2a0463eb1e66e684eb12c5f2891afddf,
+        type: 3}
+      propertyPath: m_TagString
       value: Pod
       objectReference: {fileID: 0}
     m_RemovedComponents: []

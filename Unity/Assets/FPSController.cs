@@ -60,13 +60,10 @@ public class FPSController : MonoBehaviour
 
     void Walk(float units)
     {
-        if (canMove)
-        {
             Vector3 forward = mainCamera.transform.forward;
             //forward.y = 0;
             forward.Normalize();
             transform.position += forward * units;
-        }
     }
 
     void Fly(float units)
@@ -86,6 +83,7 @@ public class FPSController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.R))
             {
+                canMove = false;
                 followCamera.followingTarget = true;
             }
         }
@@ -96,7 +94,7 @@ public class FPSController : MonoBehaviour
     {
 
         //Cursor.lockState = CursorLockMode.Confined;
-  
+
         float mouseX, mouseY;
         float speed = this.speed;
 
@@ -113,7 +111,7 @@ public class FPSController : MonoBehaviour
         {
             speed *= 5.0f;
         }
-            
+
         if (Input.GetKey(KeyCode.E))
         {
             Fly(Time.deltaTime * speed);
@@ -135,7 +133,7 @@ public class FPSController : MonoBehaviour
 
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
-            
+
 
         Yaw(mouseX * lookSpeed * Time.deltaTime);
         if (allowPitch)
@@ -143,9 +141,12 @@ public class FPSController : MonoBehaviour
             Pitch(-mouseY * lookSpeed * Time.deltaTime);
         }
 
-        float contWalk = Input.GetAxis("Vertical");
-        float contStrafe = Input.GetAxis("Horizontal");
-        Walk(contWalk * speed * Time.deltaTime);
-        Strafe(contStrafe * speed * Time.deltaTime);
+        if (canMove) 
+        { 
+           float contWalk = Input.GetAxis("Vertical");
+           float contStrafe = Input.GetAxis("Horizontal");
+           Walk(contWalk * speed * Time.deltaTime);
+           Strafe(contStrafe * speed * Time.deltaTime);
+        }
     }
 }

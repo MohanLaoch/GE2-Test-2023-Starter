@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
+    public FPSController fPSController;
+
     public Transform target;
 
     public bool followingTarget = false;
     // Start is called before the first frame update
     void Start()
     {
-            target = GameObject.Find("Pod").GetComponent<Transform>();
+        target = GameObject.Find("Pod").GetComponent<Transform>();
+        fPSController = this.gameObject.GetComponent<FPSController>();
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class FollowCamera : MonoBehaviour
         if (Input.GetKey(KeyCode.Z))
         {
             followingTarget = false;
+            fPSController.canMove = true;
         }
 
         Debug.Log(followingTarget);

@@ -7,7 +7,7 @@ public class ColourChange : MonoBehaviour
     private MeshRenderer renderer;
 
     float timeLeft;
-    Color targetColor;
+    Color color;
 
     private void Start()
     {
@@ -19,21 +19,17 @@ public class ColourChange : MonoBehaviour
     {
         if (timeLeft <= Time.deltaTime)
         {
-            // transition complete
-            // assign the target color
-            renderer.material.color = targetColor;
+            renderer.material.color = color;
 
             // start a new transition
-            targetColor = new Color(Random.value, Random.value, Random.value);
+            color = new Color(Random.value, Random.value, Random.value);
             timeLeft = 1.0f;
         }
         else
         {
-            // transition in progress
-            // calculate interpolated color
-            renderer.material.color = Color.Lerp(renderer.material.color, targetColor, Time.deltaTime / timeLeft);
 
-            // update the timer
+            renderer.material.color = Color.Lerp(renderer.material.color, color, Time.deltaTime / timeLeft);
+
             timeLeft -= Time.deltaTime;
         }
     }
